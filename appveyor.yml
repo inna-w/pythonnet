@@ -64,6 +64,9 @@ on_finish:
 artifacts:
   - path: dist\*
 
+nuget:
+  account_feed: true
+
 notifications:
   - provider: Slack
     incoming_webhook:
