@@ -1,4 +1,5 @@
 version: '{branch}-{build}'
+build: off
 
 image:
   - Visual Studio 2017
@@ -38,9 +39,6 @@ install:
   # Install OpenCover. Can't put on `packages.config`, not Mono compatible
   - .\tools\nuget\nuget.exe install OpenCover -OutputDirectory packages -Verbosity quiet
 
-build:
-  publish_nuget: true
-
 build_script:
   # Create clean `sdist`. Only used for releases
   - python setup.py --quiet sdist
@@ -63,9 +61,6 @@ on_finish:
 
 artifacts:
   - path: dist\*
-
-nuget:
-  account_feed: true
 
 notifications:
   - provider: Slack
