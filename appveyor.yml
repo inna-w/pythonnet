@@ -44,6 +44,7 @@ build_script:
   - python setup.py --quiet sdist
   # Build `wheel` with coverage of `setup.py`
   - coverage run setup.py bdist_wheel %BUILD_OPTS%
+  - ps: .\nuget\pack.ps1
 
 test_script:
   - pip install --no-index --find-links=.\dist\ pythonnet
@@ -61,6 +62,7 @@ on_finish:
 
 artifacts:
   - path: dist\*
+  - path: 'nuget\*.nupkg'
 
 notifications:
   - provider: Slack
