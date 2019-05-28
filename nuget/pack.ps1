@@ -1,4 +1,4 @@
-$project_file = ".\src\runtime\Python.Runtime.csproj"
+$project_file = ".\src\runtime\Python.Runtime.15.csproj"
 
 Write-Host "Creating NuGet package from $project_file"
 
