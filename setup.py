@@ -347,23 +347,6 @@ class BuildExtPythonnet(build_ext.build_ext):
         subprocess.check_call(" ".join(cmd + ["/t:Clean"]), shell=use_shell)
         subprocess.check_call(" ".join(cmd + ["/t:Build"]), shell=use_shell)
         if DEVTOOLS == "MsDev15" or DEVTOOLS == "dotnet":
-            cmdpack = [
-            _xbuild,
-            os.path.join(os.path.dirname(os.path.abspath(__file__)), "src", "runtime", "Python.Runtime.15.csproj"),
-            "/p:PackageId=pythonnet_py{0}{1}_{2}".format(PY_MAJOR, PY_MINOR, ARCH),
-            "/p:PackageOutputPath={}".format(os.path.join(os.path.dirname(os.path.abspath(__file__)),"nuget")),
-            "/p:Configuration={}".format(_config),
-            "/p:Platform={}".format(ARCH),
-            '/p:{}DefineConstants="{}"'.format(
-                "Custom" if _custom_define_constants else "", "%3B".join(defines)
-            ),
-            '/p:PythonBuildDir="{}"'.format(os.path.abspath(dest_dir)),
-            '/p:PythonInteropFile="{}"'.format(os.path.basename(interop_file)),
-            "/verbosity:{}".format(VERBOSITY),
-            ]
-
-            subprocess.check_call(" ".join(cmdpack + ["/t:Pack"]), shell=use_shell)
-
             subprocess.check_call(
                 " ".join(
                     cmd
