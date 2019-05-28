@@ -349,7 +349,7 @@ class BuildExtPythonnet(build_ext.build_ext):
         if DEVTOOLS == "MsDev15" or DEVTOOLS == "dotnet":
             cmdpack = [
             _xbuild,
-            os.path.join("src", "runtime", "Python.Runtime.15.csproj"),
+            os.path.join(os.path.dirname(os.path.abspath(__file__)), "src", "runtime", "Python.Runtime.15.csproj"),
             "/p:PackageId=pythonnet_py{0}{1}_{2}".format(PY_MAJOR, PY_MINOR, ARCH),
             "/p:PackageOutputPath={}".format(os.path.join(os.path.dirname(os.path.abspath(__file__)),"nuget")),
             "/p:Configuration={}".format(_config),
