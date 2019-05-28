@@ -16,6 +16,8 @@ environment:
 
   matrix:
     - PYTHON_VERSION: 3.6
+      BUILD_OPTS: --xplat
+    - PYTHON_VERSION: 3.6
 
 matrix:
     allow_failures:
