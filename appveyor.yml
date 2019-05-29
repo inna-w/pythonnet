@@ -15,9 +15,18 @@ environment:
     CODECOV_ENV: PYTHON_VERSION, PLATFORM
 
   matrix:
-    - PYTHON_VERSION: 3.6
+    - PYTHON_VERSION: 2.7 
+      BUILD_OPTS: --xplat
+    - PYTHON_VERSION: 3.5
       BUILD_OPTS: --xplat
     - PYTHON_VERSION: 3.6
+      BUILD_OPTS: --xplat
+    - PYTHON_VERSION: 3.7
+      BUILD_OPTS: --xplat
+    - PYTHON_VERSION: 2.7
+    - PYTHON_VERSION: 3.5
+    - PYTHON_VERSION: 3.6
+    - PYTHON_VERSION: 3.7
 
 matrix:
     allow_failures:
@@ -46,7 +55,6 @@ build_script:
   - python setup.py --quiet sdist
   # Build `wheel` with coverage of `setup.py`
   - coverage run setup.py bdist_wheel %BUILD_OPTS%
-  - ps: .\nuget\pack.ps1
 
 test_script:
   - pip install --no-index --find-links=.\dist\ pythonnet
@@ -64,7 +72,6 @@ on_finish:
 
 artifacts:
   - path: dist\*
-  - path: '.\src\runtime\bin\*.nupkg'
 
 notifications:
   - provider: Slack
